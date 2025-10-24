@@ -2,10 +2,11 @@ FROM python:3.11-slim
 
 RUN apt-get update && apt-get install -y \
     wget curl unzip gnupg \
-    chromium chromium-driver \
+    google-chrome-stable \
+    chromium-driver \
     && rm -rf /var/lib/apt/lists/*
 
-ENV CHROME_BIN="/usr/bin/chromium"
+ENV CHROME_BIN="/usr/bin/google-chrome"
 ENV CHROMEDRIVER_PATH="/usr/bin/chromedriver"
 
 WORKDIR /app
