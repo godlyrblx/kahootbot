@@ -16,8 +16,10 @@ RUN wget -O /tmp/chrome.deb https://dl.google.com/linux/direct/google-chrome-sta
     apt-get install -y /tmp/chrome.deb && \
     rm /tmp/chrome.deb
 
-# Install matching ChromeDriver for Chrome 141
-RUN wget -O /tmp/chromedriver.zip https://chromedriver.storage.googleapis.com/141.0.7390.0/chromedriver_linux64.zip && \
+# Install matching ChromeDriver
+RUN CHROME_VERSION=$(google-chrome --version | awk '{print $3}' | cut -d '.' -f 1) && \
+    DRIVER_VERSION=$(curl -s "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_$CHROME_VERSION") && \
+    wget -O /tmp/chromedriver.zip "https://chromedriver.storage.googleapis.com/$DRIVER_VERSION/chromedriver_linux64.zip" && \
     unzip /tmp/chromedriver.zip -d /usr/bin/ && \
     rm /tmp/chromedriver.zip && \
     chmod +x /usr/bin/chromedriver
