@@ -1,14 +1,18 @@
 from flask import Flask, request, jsonify
 from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.chrome.options import Options
 from concurrent.futures import ThreadPoolExecutor
 import time
 
 app = Flask(__name__)
+
+@app.route("/")
+def home():
+    return "Kahoot bot server is running!"
 
 @app.route("/launch", methods=["POST"])
 def launch():
